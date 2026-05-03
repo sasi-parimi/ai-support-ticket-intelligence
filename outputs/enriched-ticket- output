@@ -1,0 +1,6 @@
+ticket_id,summary,sentiment,priority,department,solution
+101,Invoice download issue,neutral,low,billing,Retry invoice download after payment settlement completes
+102,OTP not received,neutral,medium,auth,Wait 2 minutes and request OTP again
+103,Payment failure,negative,high,payments,Verify transaction and initiate refund workflow
+104,Application crash,negative,high,app,Clear cache and retry checkout flow
+105,Shipment delay,neutral,medium,shipping,Provide updated ETA and raise logistics escalation if delayed further
