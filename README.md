@@ -1,60 +1,67 @@
 # AWS GenAI Ticket Resolution Pipeline
 
-## Overview
-An AI-powered support ticket intelligence pipeline built using:
-
-- AWS EMR
-- PySpark
-- Amazon Bedrock
-- Claude 3 Sonnet
-- Retrieval-Augmented Generation (RAG)
-- Amazon S3
-
-This project automates customer support ticket classification and generates grounded resolution recommendations using enterprise knowledge retrieval.
+> AI-powered support ticket classification and intelligent resolution generation using AWS EMR, PySpark, Amazon Bedrock, Claude 3 Sonnet, and Retrieval-Augmented Generation (RAG).
 
 ---
 
-## Problem Statement
-Customer support teams receive thousands of unstructured support tickets like:
+## Project Overview
 
-> "Payment deducted but order failed"
+This project builds an **AI-driven customer support automation pipeline** for e-commerce ticket handling.
 
-Manual triaging is slow and inconsistent.
+It processes unstructured customer complaints and converts them into **actionable support intelligence** by automatically generating:
 
-This pipeline automates:
+- Ticket Summary
+- Sentiment Analysis
+- Priority Level
+- Department Routing
+- Resolution Recommendation (via RAG)
 
-✅ Ticket understanding  
-✅ Sentiment analysis  
-✅ Priority assignment  
-✅ Department routing  
-✅ Solution recommendation using RAG
+This reduces manual triaging effort and improves customer support response time.
 
 ---
 
-## Architecture Flow
+## Business Problem
 
-Customer Tickets (Amazon S3 CSV)  
-↓  
-PySpark on AWS EMR  
-↓  
-Distributed Processing using mapPartitions()  
-↓  
-Amazon Bedrock Classification (Claude 3 Sonnet)  
-↓  
-Generate:
-- Summary
-- Sentiment
-- Priority
-- Department
+Support teams receive thousands of tickets such as:
 
-↓  
-Amazon Bedrock Knowledge Base (RAG)  
-↓  
-Retrieve enterprise support docs  
-↓  
-Generate grounded solution recommendation  
-↓  
-Final enriched ticket dataset
+> **"Payment deducted but order failed"**
+
+Manual processing creates:
+
+- Slow routing  
+- Inconsistent prioritization  
+- Delayed resolution  
+- Higher operational cost  
+
+This pipeline automates the entire process.
+
+---
+
+## Architecture
+
+```text
+Customer Tickets (Amazon S3)
+        ↓
+PySpark on AWS EMR
+        ↓
+Distributed Processing using mapPartitions()
+        ↓
+Amazon Bedrock (Claude 3 Sonnet)
+        ↓
+Classification:
+ • Summary
+ • Sentiment
+ • Priority
+ • Department
+        ↓
+Amazon Bedrock Knowledge Base (RAG)
+        ↓
+Retrieve enterprise support documentation
+        ↓
+Generate grounded resolution recommendation
+        ↓
+Final enriched support dataset
+```
 
 ---
 
@@ -65,7 +72,10 @@ ticket_id,issue_text
 101,Unable to download invoice
 102,OTP not received during login
 103,Payment deducted but order failed
+104,App crashes during checkout
 ```
+
+---
 
 ## Sample Output
 
@@ -74,22 +84,24 @@ ticket_id,summary,sentiment,priority,department,solution
 101,Invoice issue,neutral,low,billing,Retry invoice download after settlement
 102,OTP issue,neutral,medium,auth,Wait 2 minutes and retry OTP
 103,Payment failure,negative,high,payments,Verify transaction and initiate refund workflow
+104,Checkout app crash,negative,high,app,Clear cache and retry checkout process
 ```
 
 ---
 
 ## Tech Stack
+
 - AWS EMR
-- Apache Spark
+- Apache Spark (PySpark)
 - Amazon Bedrock
 - Claude 3 Sonnet
-- Retrieval-Augmented Generation
+- Retrieval-Augmented Generation (RAG)
 - Amazon S3
 - Python
 
 ---
 
-## Project Structure
+## Repository Structure
 
 ```text
 architecture/
@@ -102,9 +114,32 @@ README.md
 
 ---
 
+## Key Engineering Concepts Used
+
+- Distributed Data Processing using Spark partitions
+- LLM-based classification pipeline
+- Prompt engineering
+- JSON structured response parsing
+- Retrieval-Augmented Generation
+- Knowledge Base grounding
+- Cloud-scale ticket enrichment workflow
+
+---
+
 ## Business Impact
-- Faster ticket triaging
-- Automated routing
-- Faster customer resolution
-- Improved support productivity
-- Better analytics on ticket categories
+
+- Faster ticket triaging  
+- Automated department routing  
+- Improved support productivity  
+- Faster issue resolution  
+- Better analytics visibility  
+- Reduced manual operational effort  
+
+---
+
+## Future Improvements
+
+- Batch inference optimization for Bedrock calls  
+- Dashboard integration using BI tools  
+- Real-time streaming ticket processing  
+- Feedback loop for response quality improvement  
